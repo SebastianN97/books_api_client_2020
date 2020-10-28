@@ -12,6 +12,22 @@ const displayBooks = async () => {
   });
 };
 
+const submitHandler = async () => {
+  event.preventDefault()
+  let author = event.target.author.value
+  let title = event.target.title.value
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({title: title, author: author})
+  })
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   displayBooks();
+  const createBookForm = document.getElementById('create-book')
+  createBookForm.addEventListener('submit', submitHandler)
 });
